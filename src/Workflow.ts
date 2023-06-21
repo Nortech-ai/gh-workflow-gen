@@ -45,7 +45,7 @@ export interface Step<
   uses?: VersionT[Extract<keyof VersionT, string>];
 
   run?: string;
-  with?: Record<string, string | boolean | number>;
+  with?: Record<string, string | boolean | number | string[]>;
   env?: Record<string, string | boolean>;
 }
 
