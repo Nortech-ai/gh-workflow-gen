@@ -1,10 +1,10 @@
+import crypto from "crypto";
 import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
-import { Job, Workflow } from "./Workflow";
-
+import slugify from "slugify";
+import { CacheStep, Job, Step, Workflow } from "./Workflow";
 export * from "./Workflow";
-
 /**
  * Convert an array of entries into an object of type T;
  */
@@ -112,3 +112,51 @@ export const convertToYaml = <T extends Record<string, string>>(
 ): string => {
   return yaml.dump(normalize(workflow), { noRefs: true });
 };
+
+/**
+ * Add a cache step to the given step.
+ * @param step The step to add a cache to.
+ * @param cache How to configure the cache.
+ * @param runEvenWhenCacheHit Whether to run the step even if the cache is hit.
+ * */
+export function stepWithCache(
+  step: Step,
+  cache: Omit<CacheStep, "name" | "uses" | "with" | "id"> & {
+    id?: string;
+    with: Omit<CacheStep["with"], "key"> & {
+      key?: string;
+    };
+  },
+  runEvenWhenCacheHit?: boolean
+) {
+  const cacheId =
+    cache.id ??
+    `cache-${slugify(step.name, {
+      lower: true,
+      replacement: "-",
+    })}`;
+  const hashedKey = crypto
+    .createHash("md5")
+    .update(JSON.stringify(step.with))
+    .digest("hex");
+  const cacheStep = {
+    name: `Cache - ${step.name}`,
+    uses: "actions/cache@v3",
+    ...cache,
+    id: cacheId,
+    with: {
+      ...cache.with,
+      key: `${cacheId}-\${{ runner.os }}-${hashedKey}-${cache.with.key ?? ""}`,
+    },
+  } satisfies CacheStep;
+
+  const finalStep = {
+    ...step,
+    //TODO: merge ifs
+    ...(!runEvenWhenCacheHit
+      ? { if: `steps.${cacheId}.outputs.cache-hit != 'true'` }
+      : {}),
+  };
+
+  return [cacheStep, finalStep] as const;
+}
