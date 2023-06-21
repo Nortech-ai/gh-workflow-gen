@@ -19,6 +19,7 @@
     "workflow",
     "gh"
   ],
+  "main": "./dist/index.js",
   "scripts": {
     "prebuild": "rimraf dist/",
     "build": "yarn tsup src/* --sourcemap inline",
