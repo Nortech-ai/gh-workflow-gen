@@ -21,17 +21,13 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/",
-    "build": "cd src/ && tsc",
+    "build": "yarn tsup src/*",
     "test": "node --no-warnings --loader ts-node/esm test/test_runner.ts",
     "prepare": "husky install",
     "prepack": "npm run build",
     "prepublishOnly": "npm run build"
   },
-  "exports": {
-    "import": "./dist/index.js"
-  },
   "types": "./dist/index.d.ts",
-  "type": "module",
   "engines": {
     "node": ">=14.18.0"
   },
