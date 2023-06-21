@@ -21,6 +21,7 @@
   "scripts": {
     "prebuild": "rimraf dist/",
     "build": "yarn tsup src/* --sourcemap inline --dts",
+    "watch": "yarn tsup src/* --sourcemap inline --dts --watch",
     "test": "node --no-warnings --loader ts-node/esm test/test_runner.ts",
     "prepare": "husky install",
     "prepack": "npm run build",
