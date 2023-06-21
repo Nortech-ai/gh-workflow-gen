@@ -56,7 +56,7 @@ export interface CacheStep {
   with: {
     path: string;
     key: string;
-    "restore-keys": string;
+    "restore-keys"?: string;
   };
 }
 
