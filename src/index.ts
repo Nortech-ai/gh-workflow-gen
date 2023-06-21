@@ -110,5 +110,5 @@ export const writeWorkflow = <T extends Record<string, string>>(
 export const convertToYaml = <T extends Record<string, string>>(
   workflow: Workflow<T>
 ): string => {
-  return yaml.dump(normalize(workflow), { forceQuotes: true, noRefs: true });
+  return yaml.dump(normalize(workflow), { noRefs: true });
 };
