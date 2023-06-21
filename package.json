@@ -9,9 +9,7 @@
     "url": "https://github.com/nortech-ai/gh-workflow-gen"
   },
   "files": [
-    "src",
-    "dist",
-    "examples"
+    "dist"
   ],
   "keywords": [
     "github workflows",
@@ -22,7 +20,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "prebuild": "rimraf dist/",
-    "build": "yarn tsup src/* --sourcemap inline",
+    "build": "yarn tsup src/* --sourcemap inline --dts",
     "test": "node --no-warnings --loader ts-node/esm test/test_runner.ts",
     "prepare": "husky install",
     "prepack": "npm run build",
