@@ -49,6 +49,17 @@ export interface Step<
   env?: Record<string, string | boolean>;
 }
 
+export interface CacheStep {
+  name: string;
+  id: string;
+  uses: `actions/cache@${string}`;
+  with: {
+    path: string;
+    key: string;
+    "restore-keys": string;
+  };
+}
+
 export type Input = {
   required?: boolean;
   type?: "string" | "bool" | "number" | "enum";
