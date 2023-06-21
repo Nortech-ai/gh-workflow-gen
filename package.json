@@ -6,7 +6,7 @@
   "homepage": "https://github.com/wardellbagby/gh-workflow-gen",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wardellbagby/gh-workflow-gen"
+    "url": "https://github.com/nortech-ai/gh-workflow-gen"
   },
   "files": [
     "src",
