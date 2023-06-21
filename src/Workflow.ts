@@ -49,6 +49,15 @@ export interface Step<
   env?: Record<string, string | boolean>;
 }
 
+export type Input = {
+  required?: boolean;
+  type?: "string" | "bool" | "number" | "enum";
+};
+
+export type Secret = {
+  required?: boolean;
+};
+
 export interface Workflow<
   VersionT extends Record<string, string> = Record<string, string>
 > {
@@ -58,6 +67,10 @@ export interface Workflow<
     pull_request?: BranchesTagsOrPaths;
     schedule?: Schedule[];
     workflow_dispatch?: Record<string, never>;
+    workflow_call?: {
+      inputs?: { [name: string]: Input };
+      secrets?: { [name: string]: Secret };
+    };
   };
   jobs: Record<string, Job<VersionT>>;
 }
