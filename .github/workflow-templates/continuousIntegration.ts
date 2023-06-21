@@ -1,5 +1,5 @@
+import { test } from "./helpers/test";
 import { AppWorkflow } from "./index";
-import { test } from "./helpers/test.js";
 
 export const continuousIntegration: AppWorkflow = {
   name: "Run all tests",

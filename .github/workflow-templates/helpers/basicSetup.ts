@@ -1,5 +1,5 @@
 import { AppStep } from "../index";
-import { CACHE, CHECKOUT, SETUP_NODE } from "./Versions.js";
+import { CACHE, CHECKOUT, SETUP_NODE } from "./Versions";
 
 export const basicSetup: AppStep[] = [
   {

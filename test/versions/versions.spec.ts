@@ -1,11 +1,8 @@
-import {
-  Workflow,
-  convertToYaml,
-} from "@wardellbagby/gh-workflow-gen";
-import path from "path";
+import { Workflow, convertToYaml } from "@wardellbagby/gh-workflow-gen";
 import fs from "fs";
-import { assertEquals, directory } from "../test_helpers.js";
-import * as Versions from "./Verions.js";
+import path from "path";
+import { assertEquals, directory } from "../test_helpers";
+import * as Versions from "./Verions";
 
 export const testWorkflowWithVersions = () => {
   const workflow: Workflow<typeof Versions> = {

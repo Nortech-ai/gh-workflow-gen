@@ -1,5 +1,5 @@
-import { basicSetup } from "./basicSetup.js";
 import { AppJob } from "../index";
+import { basicSetup } from "./basicSetup";
 
 export const test: AppJob = {
   name: "Run tests",
